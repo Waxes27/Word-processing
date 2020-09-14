@@ -1,5 +1,5 @@
 import re
-import time
+import string
 def split(delimiters, text):
     """
     Splits a string using all the delimiters supplied as input string
@@ -30,27 +30,41 @@ def words_lengths_map(text):
     """
     mapping len of word : number of those words
     """
-    word_list = convert_to_word_list(text)
-    
-    dictionary = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 14:0}
-    for i in word_list:
-        if int(len(i)) in dictionary:
-            dictionary[int(len(i))] += 1
-    values = list(dictionary.values())
-    print(values)
-    for i in values:
-        if i == 0:
-            values.remove(i)
-    print(values)
+    length_of_words = []
+    text = convert_to_word_list(text)
+    [length_of_words.append(len(i)) for i in text]
+    dictionary = {length_of_word: length_of_words.count(length_of_word) for length_of_word in sorted(length_of_words)}
+    # a = tuple(map(lambda word: len(word),text))# LAMBDA VERSION with MAP
+    return dictionary#dict(sorted(dictionary.items(), key = lambda kv: (kv[1], kv[0])))
 
 
-    return dictionary
+def get_alphabet_characters():
+    return list(string.ascii_lowercase)
+
 
 def letters_count_map(text):
-    pass
+    """
+    return a dict() with an index of the letters found in the text param
+    """
+    alpha = get_alphabet_characters()
+    text = convert_to_word_list(text)
+    list_of_chars = []
+    for x in range(len(text)):
+        [list_of_chars.append(i) for i in text[x]]
+    dictionary = {alpha:list_of_chars.count(alpha) for alpha in alpha}
+    return dictionary
 
 
 def most_used_character(text):
-    pass
+    list_of_chars= []
+    alpha = get_alphabet_characters()
+    for x in range(len(text)):
+        [list_of_chars.append(i) for i in text[x]]
+    dictionary = {list_of_chars.count(alpha):alpha for alpha in alpha}
+    dictionary = sorted(dictionary.items())
+    if len(dictionary) != 1:
+        return dictionary.pop(-1)[1]
+    else:
+        return
 
-print(words_lengths_map('These are indeed interesting, an obvious understatement, times. What say you?'))
+
