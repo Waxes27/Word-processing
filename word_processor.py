@@ -12,6 +12,9 @@ def split(delimiters, text):
 
 
 def convert_to_word_list(text):
+    """
+    creates a list from a sentence
+    """
     text = text.lower()
     word_list = split("?,.; ",text)
     #print(len(word_list[0]))
@@ -21,6 +24,9 @@ def convert_to_word_list(text):
 
 
 def words_longer_than(length, text):
+    """
+    finds words longer than specified arg...
+    """
     word_list = split("?,.; ",text)
    
     return [i for i in word_list if len(i) > length]
@@ -39,6 +45,9 @@ def words_lengths_map(text):
 
 
 def get_alphabet_characters():
+    """
+    returns list of alphabets
+    """
     return list(string.ascii_lowercase)
 
 
@@ -56,6 +65,9 @@ def letters_count_map(text):
 
 
 def most_used_character(text):
+    """
+    finds the most used character
+    """
     list_of_chars= []
     alpha = get_alphabet_characters()
     for x in range(len(text)):
@@ -68,3 +80,4 @@ def most_used_character(text):
         return
 
 
+#print(words_lengths_map("Facing his greatest fear, he ate his first marshmallow."))
